@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Air Draw</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #1e1e2f;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: #2c2c3f;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        .toolbar form {
+            display: inline;
+        }
+
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .red { background: #ff4d4d; color: white; }
+        .green { background: #4dff88; color: black; }
+        .blue { background: #4da6ff; color: white; }
+        .eraser { background: #aaaaaa; color: black; }
+        .clear { background: #ff9933; color: black; }
+        .size { background: #6666ff; color: white; }
+
+        .video-container {
+            margin-top: 20px;
+        }
+
+        img {
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🎨 Air Drawing App</h1>
+
+<div class="toolbar">
+
+    <form method="POST" action="{% url 'set_mode' 'red' %}">
+        {% csrf_token %}
+        <button class="red">Red</button>
+    </form>
+
+    <form method="POST" action="{% url 'set_mode' 'green' %}">
+        {% csrf_token %}
+        <button class="green">Green</button>
+    </form>
+
+    <form method="POST" action="{% url 'set_mode' 'blue' %}">
+        {% csrf_token %}
+        <button class="blue">Blue</button>
+    </form>
+
+    <form method="POST" action="{% url 'set_mode' 'eraser' %}">
+        {% csrf_token %}
+        <button class="eraser">Eraser</button>
+    </form>
+
+    <form method="POST" action="{% url 'size' 'increase' %}">
+        {% csrf_token %}
+        <button class="size">Size +</button>
+    </form>
+
+    <form method="POST" action="{% url 'size' 'decrease' %}">
+        {% csrf_token %}
+        <button class="size">Size -</button>
+    </form>
+
+</div>
+
+<div class="video-container">
+    <img src="{% url 'video_feed' %}" width="900">
+</div>
+
+</body>
+</html>
